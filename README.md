@@ -1,2 +1,6 @@
-# anamorphix
-Allows editing the pixel aspect ratio, which is useful for anamorphic photos pre-processing
+# Setup
+Required Node version is 22.15+
+
+`npm install`
+
+`npm run build`

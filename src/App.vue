@@ -1,0 +1,14 @@
+<template lang="pug">
+  Header
+
+  main
+    router-view
+</template>
+
+<script setup lang="ts">
+
+</script>
+
+<style lang="sass">
+
+</style>

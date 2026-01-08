@@ -5,7 +5,7 @@ section.home
       h2.home__heading Pixel aspect ratio editing tool
 
       VFileUpload(
-        v-model="rawFiles"
+        v-model="rawFilesModel"
         multiple=true
         webkitdirectory="true"
         clearable=true
@@ -13,12 +13,13 @@ section.home
         @rejected="onRejectFiles"
       )
 
-      .home__rejected-files(v-if="rejectedFiles.length")
+      .home__rejected-files(v-if="rejectedFilesModel.length")
         span Some files was rejected:
 
-        VList(density="compact")
+        VList(density="comfortable")
           VListItem(
-            v-for="file in rejectedFiles"
+            class="border-sm"
+            v-for="file in rejectedFilesModel"
             :key="file.name"
             :title="file.name"
             :subtitle="file.type"
@@ -28,19 +29,28 @@ section.home
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
+import { useFilesStore } from '../store/index'
 import { COMPATIBLE_FILE_FORMATS } from '../constants/fileFormats';
 
-const rawFiles = ref<File[]>([]);
-const rejectedFiles = ref<File[]>([]);
+const filesStore = useFilesStore();
 
-watch(rawFiles, (newRawFiles) => {
-  console.log(newRawFiles);
+
+// Computed
+const rawFilesModel = computed<File[]>({
+  get: () => filesStore.rawFiles,
+  set: (files) => filesStore.setRawFiles(files),
 });
 
+const rejectedFilesModel = computed<File[]>({
+  get: () => filesStore.rejectedFiles,
+  set: (files) => filesStore.setRejectedFiles(files),
+});
+
+
+// Methods
 function onRejectFiles(evt: File[]) {
-  console.log('On R', evt);
-  rejectedFiles.value = evt;
+  rejectedFilesModel.value = evt;
 }
 </script>
 

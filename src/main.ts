@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import './style.css'
 import App from './App.vue'
 import router from './router'
@@ -13,6 +14,7 @@ import * as directives from 'vuetify/directives'
 import { VFileUpload } from 'vuetify/labs/VFileUpload'
 
 const app = createApp(App);
+const pinia = createPinia();
 const vuetify = createVuetify({
   components,
   directives,
@@ -30,5 +32,6 @@ app.component('VFileUpload', VFileUpload);
 
 app
 	.use(router)
+  .use(pinia)
 	.use(vuetify)
 	.mount('#app')

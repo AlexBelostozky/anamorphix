@@ -1,8 +1,10 @@
 <template lang="pug">
-  Header
+Header
 
-  main
-    router-view
+main
+  router-view
+
+Footer
 </template>
 
 <script setup lang="ts">
@@ -10,5 +12,7 @@
 </script>
 
 <style lang="sass">
-
+main
+  flex-grow: 1
+  padding: 40px 0
 </style>
